@@ -27,4 +27,4 @@ if __name__ == '__main__':
                              auto_offset_reset='earliest',
                              consumer_timeout_ms=10000)
     print(consumer.topics())
-    read_from_topic(consumer, 'wordcount')
+    read_from_topic(consumer, 'trade_echo')
