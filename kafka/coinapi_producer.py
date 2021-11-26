@@ -10,14 +10,14 @@ class CoinAPIv1_subscribe(object):
         self.apikey = apikey
         self.heartbeat = True
         self.subscribe_data_type = ["trade"]
-        self.taker_side = ["BUY"]
+        self.subscribe_filter_asset_id = ["BTC", "ETH", "BNB", "SOL", "ADA", "XRP", "DOT", "DOGE", "SHIB", "LTC"]
 
 
 def on_message(ws, message):
-    if json.loads(message)['type'] == 'trade':
+    data = json.loads(message)
+    if data['type'] == 'trade':
+        print(message)
         producer.send('trade', bytes(message, encoding='utf-8'))
-        print("Sending " + message)
-        producer.flush(timeout=60)
 
 
 def on_error(ws, message):
