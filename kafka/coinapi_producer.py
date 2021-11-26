@@ -16,7 +16,6 @@ class CoinAPIv1_subscribe(object):
 def on_message(ws, message):
     data = json.loads(message)
     if data['type'] == 'trade':
-        print(message)
         producer.send('trade', bytes(message, encoding='utf-8'))
 
 
@@ -34,7 +33,7 @@ def on_open(ws):
 
 
 if __name__ == "__main__":
-    producer = KafkaProducer(bootstrap_servers='34.69.175.54:9092')  # VM's external IP
+    producer = KafkaProducer(bootstrap_servers='34.69.236.83:9092')  # VM's external IP
     ws = websocket.WebSocketApp("ws://ws.coinapi.io/v1/",
                                 on_open=on_open,
                                 on_message=on_message,
