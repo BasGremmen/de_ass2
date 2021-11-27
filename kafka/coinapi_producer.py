@@ -10,7 +10,7 @@ class CoinAPIv1_subscribe(object):
         self.apikey = apikey
         self.heartbeat = True
         self.subscribe_data_type = ["trade"]
-        self.subscribe_filter_asset_id = ["BTC", "ETH", "BNB", "SOL", "ADA", "XRP", "DOT", "DOGE", "SHIB", "LTC"]
+        self.subscribe_filter_asset_id = ["ADA"]
 
 
 def on_message(ws, message):
