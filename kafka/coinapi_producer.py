@@ -15,7 +15,7 @@ class CoinAPIv1_subscribe(object):
 
 def on_message(ws, message):
     data = json.loads(message)
-    if (data['type'] == 'trade') and ('ADA_USD' in data['symbol_id']):
+    if data['type'] == 'trade':
         producer.send('trade', bytes(message, encoding='utf-8'))
 
 
