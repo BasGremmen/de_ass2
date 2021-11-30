@@ -23,8 +23,7 @@ def read_from_topic_with_partition_offset(kafka_consumer, topic):
 
 
 if __name__ == '__main__':
-    consumer = KafkaConsumer(bootstrap_servers='34.71.229.54:9092',  # use your VM's external IP Here!
+    consumer = KafkaConsumer(bootstrap_servers='34.121.159.28:9092',  # use your VM's external IP Here!
                              auto_offset_reset='earliest',
                              consumer_timeout_ms=90000)
-    print(consumer.topics())
-    read_from_topic(consumer, 'trade_echo')
+    read_from_topic(consumer, 'trades_aggregated')
