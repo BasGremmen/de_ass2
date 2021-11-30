@@ -10,8 +10,8 @@ def create_topics(admin, topic_list):
 
 
 if __name__ == '__main__':
-    admin_client = KafkaAdminClient(bootstrap_servers="35.226.103.131:9092",
+    admin_client = KafkaAdminClient(bootstrap_servers="34.121.159.28:9092",
                                     client_id='Crypto_producer')  # use your VM's external IP Here!
     topic_list = [NewTopic(name="trade", num_partitions=1, replication_factor=1, topic_configs={'retention.ms': '900000'})]
-    delete_topics(admin_client, topic_list)
+    delete_topics(admin_client, ['trade'])
     create_topics(admin_client, topic_list)

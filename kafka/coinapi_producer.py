@@ -33,7 +33,7 @@ def on_open(ws):
 
 
 if __name__ == "__main__":
-    producer = KafkaProducer(bootstrap_servers='35.226.103.131:9092')  # VM's external IP
+    producer = KafkaProducer(bootstrap_servers='34.121.159.28:9092')  # VM's external IP
     ws = websocket.WebSocketApp("ws://ws.coinapi.io/v1/",
                                 on_open=on_open,
                                 on_message=on_message,
