@@ -4,7 +4,8 @@ const port = 5000;
 const app = express();
 
 const Consumer = kafka.Consumer,
- client = new kafka.KafkaClient({kafkaHost: 'kafka1:9093'}),
+ client = new kafka.KafkaClient({kafkaHost: 'kafka1:9093'})
+
  consumer = new Consumer(
  client, [ { topic: 'trades_aggregated', partition: 0 } ], { autoCommit: false, fromOffset: 'latest' });
 
