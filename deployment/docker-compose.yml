@@ -4,17 +4,17 @@ volumes:
   spark-data:
     driver_opts:
       type: none
-      device: /home/p_d_gueco/data
+      device: /home/b_j_gremmen/data
       o: bind
   notebooks:
     driver_opts:
       type: none
-      device: /home/p_d_gueco/notebooks
+      device: /home/b_j_gremmen/notebooks
       o: bind
   spark-checkpoint:
     driver_opts:
       type: none
-      device: /home/p_d_gueco/checkpoint
+      device: /home/b_j_gremmen/checkpoint
       o: bind
 services:
   spark-driver-app:
@@ -89,6 +89,22 @@ services:
     volumes:
       - spark-data:/home/jovyan/data
       - spark-checkpoint:/home/jovyan/checkpoint
+  socket-service: # NodeJS server, broadcasting the kafka messages to a websocket
+      build:
+        context: ./kafka-socket
+      depends_on:
+        - zookeeper # Depends on Kafka and Zookeeper of course
+        - kafka1
+      ports:
+        - "5003:5000" # One of the free flask ports is linked to it
+      restart: always # It has some errors with not finding the topic, thus restarting until it does
+  dashboard-service: # Visualization service, a flask server rendering templates and making calls to big query
+    build:
+      context: ./dashboard
+    depends_on:
+      - socket-service
+    ports:
+      - "5004:5000"
   zookeeper:
     image: zookeeper:3.4.9
     hostname: zookeeper
@@ -102,7 +118,7 @@ services:
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka1:9093,LISTENER_DOCKER_EXTERNAL://YOUR_VM_EXTERNAL_IP:9092
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka1:9093,LISTENER_DOCKER_EXTERNAL://34.67.197.41:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
