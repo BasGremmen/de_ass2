@@ -49,11 +49,19 @@
             }
         }
     });
+    const updateData = function(value){
+        data.push(value)
+  };
+
 
     function webSocketInvoke() {
     var socket = io('http://34.67.197.41:5003');
     socket.on('event', (value) => {
-      console.log(value)
+      var val = JSON.parse(value);
+      if (val['broker'] == {{ broker }}) {
+          updateData({x: val['time_frame.end'], y: val['count']});
+          line_chart.update();
+        }
     });
   }
 
