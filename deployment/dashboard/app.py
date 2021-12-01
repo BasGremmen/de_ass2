@@ -19,9 +19,11 @@ def visualize(broker):
         'SELECT sum(count), time_frame.end FROM ass2.trades WHERE broker = "' + broker + '" GROUP BY time_frame.end ORDER BY time_frame.end DESC LIMIT 100;')
     query_job = client.query(QUERY)  # API request
     rows = query_job.result()  # Waits for query to finish
-    # Return an html file with the data in it
+
+    # Format data to fit the data the template expects
     historical = [{'x':row[1], 'y':row[0]} for row in rows]
     historical = historical[::-1]
+    # Return an html file with the data in it
     return render_template('dashboard.html', historical=historical, broker=broker)
 
 

@@ -7,7 +7,7 @@ COPY requirements.txt .
 
 # Install required python packages
 RUN pip install --no-cache-dir -r requirements.txt
-# Copy all files in model-performance-viz local host directory to /usr/src/myapp in Docker container
+# Copy all files
 COPY . .
 # Expose the port that our app runs in
 EXPOSE 5000

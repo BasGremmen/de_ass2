@@ -89,16 +89,16 @@ services:
     volumes:
       - spark-data:/home/jovyan/data
       - spark-checkpoint:/home/jovyan/checkpoint
-  socket-service:
+  socket-service: # NodeJS server, broadcasting the kafka messages to a websocket
       build:
         context: ./kafka-socket
       depends_on:
-        - zookeeper
+        - zookeeper # Depends on Kafka and Zookeeper of course
         - kafka1
       ports:
-        - "5003:5000"
-      restart: always
-  dashboard-service:
+        - "5003:5000" # One of the free flask ports is linked to it
+      restart: always # It has some errors with not finding the topic, thus restarting until it does
+  dashboard-service: # Visualization service, a flask server rendering templates and making calls to big query
     build:
       context: ./dashboard
     depends_on:

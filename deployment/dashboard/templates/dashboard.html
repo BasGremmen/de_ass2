@@ -53,10 +53,9 @@
         data.push(value)
   };
 
-
-    function webSocketInvoke() {
     var socket = io('http://34.67.197.41:5003');
     socket.on('event', (value) => {
+        console.log(value)
       var val = JSON.parse(value);
       console.log(val);
       if (val['broker'] === '{{ broker }}') {
@@ -64,9 +63,7 @@
           line_chart.update();
         }
     });
-  }
 
-  webSocketInvoke();
 </script>
 </body>
 </html>
