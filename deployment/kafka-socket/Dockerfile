@@ -1,16 +1,8 @@
-# Using python 3.7 full image as the base image
-FROM python:3.7.7-slim
-# Working Directory
-WORKDIR /usr/src/myapp
-# Copy requirements.txt  to the working directory
-COPY requirements.txt .
+FROM node:12.18.1
+ENV NODE_ENV=production
 
-# Install required python packages
-RUN pip install --no-cache-dir -r requirements.txt
-# Copy all files in model-performance-viz local host directory to /usr/src/myapp in Docker container
+WORKDIR /app
+RUN npm i express socket.io kafka-node
 COPY . .
-# Expose the port that our app runs in
-EXPOSE 5000
 
-# Run our App
-CMD ["python3","app.py"]
+CMD ["node", "server.js"]
