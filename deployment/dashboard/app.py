@@ -1,10 +1,12 @@
 from flask import Flask, json, request, Response, jsonify, render_template
 from google.cloud import bigquery
+from flask_socketio import SocketIO, emit
 import os
 import requests
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
+socketio = SocketIO(app)
 
 
 # upload to BigQuery
@@ -25,4 +27,5 @@ def visualize(broker):
     return render_template('dashboard.html', historical=historical)
 
 
-app.run(host='0.0.0.0', port=5000)
+if __name__ == '__main__':
+    socketio.run(app=app, host='0.0.0.0', port=5000)
