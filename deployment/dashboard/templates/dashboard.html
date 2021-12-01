@@ -29,12 +29,15 @@ var data = {{ historical|tojson }}
 const ctx = document.getElementById('line_chart').getContext('2d');
 const line_chart = new Chart(ctx, {
     type: 'line',
-    data: data,
+    data: {
+        datasets: [{
+            data: data
+        }]
+    },
     options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
+        parsing: {
+            xAxisKey: 'x',
+            yAxisKey: 'y'
         }
     }
 });
