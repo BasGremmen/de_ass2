@@ -22,7 +22,7 @@ def visualize(broker):
     # Return an html file with the data in it
     historical = [{'x':row[1], 'y':row[0]} for row in rows]
     historical = historical[::-1]
-    return render_template('dashboard.html', historical=historical)
+    return render_template('dashboard.html', historical=historical, broker=broker)
 
 
 if __name__ == '__main__':
