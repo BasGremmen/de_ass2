@@ -16,7 +16,7 @@ table_ref = client.dataset("ass2").table("trades")  # use the correct dataset na
 def visualize(broker):
     # Perform a query.
     QUERY = (
-        'SELECT count, time_frame.end FROM `glass-sylph-325109.ass2.trades` WHERE broker = "' + broker + '" ORDER BY time_frame.end DESC LIMIT 100')  # use the correct project id, etc.
+        'SELECT sum(count), time_frame.end FROM ass2.trades WHERE broker = "' + broker + '" GROUP BY time_frame.end ORDER BY time_frame.end DESC LIMIT 100;')
     query_job = client.query(QUERY)  # API request
     rows = query_job.result()  # Waits for query to finish
     # Return an html file with the data in it
