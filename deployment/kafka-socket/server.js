@@ -30,7 +30,7 @@ io.on('connection', client => {
 
   // On Kafka message, broadcast
 consumer.on('message', function (message) {
-    client.emit('event', message.value);
+    client.emit('event', message);
   });
 
 // On error, log
