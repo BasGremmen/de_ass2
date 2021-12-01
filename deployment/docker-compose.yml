@@ -97,6 +97,7 @@ services:
         - kafka1
       ports:
         - "5003:5000"
+      restart: always
   dashboard-service:
     build:
       context: ./dashboard
