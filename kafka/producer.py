@@ -26,7 +26,7 @@ def kafka_python_producer_async(producer, msg, topic):
 
 
 if __name__ == '__main__':
-    producer = KafkaProducer(bootstrap_servers='34.69.175.54:9092')
+    producer = KafkaProducer(bootstrap_servers='34.67.197.41:9092')
     # use your VM's external IP Here!
     for number in range(50000):
         msg = {
