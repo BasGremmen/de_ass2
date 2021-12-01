@@ -6,7 +6,7 @@ const app = express();
 const Consumer = kafka.Consumer,
  client = new kafka.KafkaClient('34.67.197.41:9092'),
  consumer = new Consumer(
- client, [ { topic: 'trades_aggregated', partition: 0 } ], { autoCommit: false });
+ client, [ { topic: 'trades_aggregated', partition: 0 } ], { autoCommit: false, fromOffset: 'latest' });
 
 const server = app.listen(port, () => {
   console.log(`Listening on port ${server.address().port}`);
@@ -23,6 +23,10 @@ io.on('connection', client => {
 consumer.on('message', function (message) {
     client.emit('event', message.value);
   });
+
+consumer.on('error', function (message) {
+    console.log(message);
+});
 
 client.on('disconnect', () => {
     console.log('Client disconnected');
