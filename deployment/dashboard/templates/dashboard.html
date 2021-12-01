@@ -28,16 +28,20 @@
 var data = {{ historical|tojson }}
 const ctx = document.getElementById('line_chart').getContext('2d');
 const line_chart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
-            data: data
+            label: 'Trades',
+            data: data,
+            borderWidth: 1
         }]
     },
     options: {
-        parsing: {
-            xAxisKey: 'x',
-            yAxisKey: 'y'
+        scales: {
+            y: {
+                beginAtZero: true
+            }
         }
     }
 });
