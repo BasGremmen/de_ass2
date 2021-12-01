@@ -96,7 +96,7 @@ services:
         - zookeeper
         - kafka1
       ports:
-        - "5003:5000"
+        - "5003:3000"
   dashboard-service:
     build:
       context: ./dashboard
