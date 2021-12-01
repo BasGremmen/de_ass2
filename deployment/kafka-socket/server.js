@@ -21,7 +21,7 @@ io.on('connection', client => {
   console.log('Connected', client);
 
 consumer.on('message', function (message) {
-    client.emit('request', message.value);
+    client.emit('event', message.value);
   });
 
 client.on('disconnect', () => {
