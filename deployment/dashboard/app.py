@@ -20,7 +20,8 @@ def visualize(broker):
     query_job = client.query(QUERY)  # API request
     rows = query_job.result()  # Waits for query to finish
     # Return an html file with the data in it
-    historical = [{'x':row[1], 'y':row[0]} for row in reversed(rows)]
+    historical = [{'x':row[1], 'y':row[0]} for row in rows]
+    historical = historical[::-1]
     return render_template('dashboard.html', historical=historical)
 
 
