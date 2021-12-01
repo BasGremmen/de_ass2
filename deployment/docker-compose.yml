@@ -89,16 +89,16 @@ services:
     volumes:
       - spark-data:/home/jovyan/data
       - spark-checkpoint:/home/jovyan/checkpoint
-  dashboard_service:
+  dashboard-service:
     build:
       context: ./dashboard
     depends_on:
       - socket_service
     ports:
       - "5004:5000"
-  socket_service:
+  socket-service:
       build:
-        context: ./kafka_websocket_service
+        context: ./kafka-socket
       depends_on:
         - zookeeper
         - kafka1
