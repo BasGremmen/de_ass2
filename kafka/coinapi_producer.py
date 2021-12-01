@@ -3,7 +3,7 @@ import json
 from kafka import KafkaProducer
 
 #API_key of CoinAPI
-api_key = 'AC857EEF-D841-4FF7-BE8E-61121010D85A' #your api key
+api_key = '' #your api key
 
 # Create the websocket listener settings
 class CoinAPIv1_subscribe(object):
