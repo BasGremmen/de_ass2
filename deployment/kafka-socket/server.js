@@ -2,6 +2,7 @@ const kafka = require('kafka-node');
 const express = require('express');
 const port = 5000;
 const app = express();
+const { Server } = require('socket.io')
 
 // Create Kafka Client and load Consumer constructer as Consumer instead of kafka.Consumer
 const Consumer = kafka.Consumer,
@@ -17,7 +18,7 @@ const server = app.listen(port, () => {
 });
 
 // Allow websocket functionality
-const io = require('socket.io')(server, {
+const io = new Server(server, {
   cors: {
     origin: '*',
   }
