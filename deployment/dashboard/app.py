@@ -6,8 +6,6 @@ import requests
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
-socketio = SocketIO(app)
-
 
 # upload to BigQuery
 client = bigquery.Client(project="glass-sylph-325109")   # use your project id
@@ -28,4 +26,4 @@ def visualize(broker):
 
 
 if __name__ == '__main__':
-    socketio.run(app=app, host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000)

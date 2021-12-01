@@ -1,0 +1,5 @@
+flask==2.0.1
+requests
+google-cloud-bigquery
+python-socketio
+kafka-python

@@ -93,10 +93,17 @@ services:
     build:
       context: ./dashboard
     depends_on:
-      - zookeeper
-      - kafka1
+      - socket_service
     ports:
       - "5004:5000"
+  socket_service:
+      build:
+        context: ./kafka_websocket_service
+      depends_on:
+        - zookeeper
+        - kafka1
+      ports:
+        - "5003:5000"
   zookeeper:
     image: zookeeper:3.4.9
     hostname: zookeeper
