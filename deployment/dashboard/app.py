@@ -20,7 +20,7 @@ def visualize(broker):
     query_job = client.query(QUERY)  # API request
     rows = query_job.result()  # Waits for query to finish
     # Return an html file with the data in it
-    return render_template('dashboard.html', historical=rows)
+    return render_template('dashboard.html', historical=list(rows))
 
 
 app.run(host='0.0.0.0', port=5000)
