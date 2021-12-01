@@ -26,6 +26,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.1/dist/chart.min.js"></script>
+<script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 <script>
     var data = {{
         historical | tojson
@@ -48,6 +49,15 @@
             }
         }
     });
+
+    function webSocketInvoke() {
+    var socket = io('http://34.67.197.41:5004');
+    socket.on('event', (value) => {
+      console.log(value)
+    });
+  }
+
+  webSocketInvoke();
 </script>
 </body>
 </html>
