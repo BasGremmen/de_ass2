@@ -53,7 +53,7 @@
         data.push(value)
   };
 
-    var socket = io('http://34.122.235.139:5003');
+    var socket = io('34.122.235.139:5003');
     socket.on('event', (value) => {
         console.log(value)
       var val = JSON.parse(value);
